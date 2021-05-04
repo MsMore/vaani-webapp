@@ -167,7 +167,7 @@
     
     let model, webcam, labelContainer, maxPredictions;
         var consecutive = 0;
-      
+        var initial;
         var result = "" ;
         var output = "";
         // Load the image model and setup the webcam
@@ -225,9 +225,10 @@
         }
         function display_prediction(classPrediction){
             max_prob_word = classPrediction;
-            if (result.length == 0){
-                if (max_prob_word == "?"){
-                    result = result;
+            if (initial == 0){
+                if (max_prob_word == "Delete"){
+                    strlen = result.length;
+                    result = result.substring(0, result.length - 1);
                 }
                 else if (max_prob_word == "Nothing"){
                     result = result;
@@ -235,7 +236,7 @@
                 else{
                     result = result.concat(classPrediction);
                 }
-               
+                initial += 1;
                 output = output.concat(classPrediction);
             } 
             
